@@ -48,6 +48,9 @@ function addStar() {
   const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
 
+  const scale = Math.random() * 0.5 + 0.1;
+  star.scale.set(scale, scale, scale);
+
   const [x, y, z] = Array(3)
     .fill()
     .map(() => THREE.MathUtils.randFloatSpread(100));
@@ -56,7 +59,7 @@ function addStar() {
   scene.add(star);
 }
 
-Array(200).fill().forEach(addStar);
+Array(2000).fill().forEach(addStar);
 
 // Avatar
 
@@ -65,19 +68,6 @@ const pictureTexture = new THREE.TextureLoader().load('picture.jpg');
 const picture = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: pictureTexture }));
 
 scene.add(picture);
-
-// Moon
-
-const moonTexture = new THREE.TextureLoader().load('moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('normal.jpg');
-
-/*
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ wireframe: true });
-const torus = new THREE.Mesh(geometry, material);
-
-scene.add(torus);
-*/
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
