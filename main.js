@@ -22,7 +22,7 @@ renderer.render(scene, camera);
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const material = new THREE.MeshStandardMaterial({ wireframe: true });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
@@ -58,30 +58,30 @@ function addStar() {
 
 Array(200).fill().forEach(addStar);
 
-// Background
-
-const spaceTexture = new THREE.TextureLoader().load('space.jpg');
-scene.background = spaceTexture;
-
 // Avatar
 
-const jeffTexture = new THREE.TextureLoader().load('jeff.png');
+const pictureTexture = new THREE.TextureLoader().load('picture.jpg');
 
-const jeff = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: jeffTexture }));
+const picture = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: pictureTexture }));
 
-scene.add(jeff);
+scene.add(picture);
 
 // Moon
 
 const moonTexture = new THREE.TextureLoader().load('moon.jpg');
 const normalTexture = new THREE.TextureLoader().load('normal.jpg');
 
+/*
+const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+const material = new THREE.MeshStandardMaterial({ wireframe: true });
+const torus = new THREE.Mesh(geometry, material);
+
+scene.add(torus);
+*/
+
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
-  new THREE.MeshStandardMaterial({
-    map: moonTexture,
-    normalMap: normalTexture,
-  })
+  new THREE.MeshStandardMaterial({ wireframe: true })
 );
 
 scene.add(moon);
@@ -89,8 +89,8 @@ scene.add(moon);
 moon.position.z = 30;
 moon.position.setX(-10);
 
-jeff.position.z = -5;
-jeff.position.x = 2;
+picture.position.z = -5;
+picture.position.x = 2;
 
 // Scroll Animation
 
@@ -100,8 +100,8 @@ function moveCamera() {
   moon.rotation.y += 0.075;
   moon.rotation.z += 0.05;
 
-  jeff.rotation.y += 0.01;
-  jeff.rotation.z += 0.01;
+  picture.rotation.y += 0.01;
+  picture.rotation.z += 0.01;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
