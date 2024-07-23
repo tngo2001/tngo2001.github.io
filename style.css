@@ -25,9 +25,12 @@ main {
   width: 100%;
   margin: 0px auto;
   padding: 120px 0px;
-  
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+}
+
+a {
+  color: #ffffff;
 }
 
 h1, h2, h3, blockquote {
@@ -42,12 +45,21 @@ canvas {
   left: 0;
 }
 
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
 
+  .social-icon {
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-decoration: none;
+  }
 
   header {
     background: var(--dark-bg);
     grid-column: 2 / span 5;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     padding: 2rem;
     margin-bottom: var(--spacing);
   }
