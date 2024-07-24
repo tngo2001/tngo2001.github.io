@@ -91,3 +91,13 @@ canvas {
   .left {
     grid-column: 6 / 12;
   }
+
+  .resume-link {
+    text-decoration: none;
+  }
+
+  .section-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }

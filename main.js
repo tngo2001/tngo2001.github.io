@@ -1,6 +1,7 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import picturePath from './picture.jpg';
 
 // Setup
 
@@ -63,7 +64,7 @@ Array(2000).fill().forEach(addStar);
 
 // Avatar
 
-const pictureTexture = new THREE.TextureLoader().load('picture.jpg');
+const pictureTexture = new THREE.TextureLoader().load(picturePath);
 
 const picture = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: pictureTexture }));
 
