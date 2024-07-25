@@ -1,7 +1,6 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import picturePath from './picture.jpg';
 
 // Setup
 
@@ -69,7 +68,7 @@ Array(2000).fill().forEach(addStar);
 
 // Avatar
 
-const pictureTexture = new THREE.TextureLoader().load(picturePath);
+const pictureTexture = new THREE.TextureLoader().load('https://i.imgur.com/vXaFLyI.jpg');
 
 const picture = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: pictureTexture }));
 
@@ -96,8 +95,7 @@ function moveCamera() {
   moon.rotation.y += 0.075;
   moon.rotation.z += 0.05;
 
-  picture.rotation.y += 0.01;
-  picture.rotation.z += 0.01;
+  picture.rotation.y += 0.02;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
@@ -117,8 +115,6 @@ function animate() {
   torus.rotation.z += 0.01;
 
   moon.rotation.x += 0.005;
-
-  // controls.update();
 
   renderer.render(scene, camera);
 }
