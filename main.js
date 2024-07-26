@@ -120,3 +120,57 @@ function animate() {
 }
 
 animate();
+
+document.addEventListener("DOMContentLoaded", function() {
+  initSlideshow("experience");
+  initSlideshow("projects");
+});
+
+function initSlideshow(slideshowId) {
+  let slideIndex = 1;
+  showSlides(slideIndex, slideshowId);
+
+  document.querySelector(`#${slideshowId} .prev`).addEventListener("click", function() {
+      moveSlide(-1, slideshowId);
+  });
+
+  document.querySelector(`#${slideshowId} .next`).addEventListener("click", function() {
+      moveSlide(1, slideshowId);
+  });
+
+  let dots = document.querySelectorAll(`#${slideshowId} .dot`);
+  dots.forEach((dot, index) => {
+      dot.addEventListener("click", function() {
+          currentSlide(index + 1, slideshowId);
+      });
+  });
+
+  function showSlides(n, slideshowId) {
+      let slides = document.querySelectorAll(`#${slideshowId} .slides div`);
+      let dots = document.querySelectorAll(`#${slideshowId} .dot`);
+
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      for (let i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+  }
+
+  function moveSlide(n, slideshowId) {
+      slideIndex += n;
+      showSlides(slideIndex, slideshowId);
+  }
+
+  function currentSlide(n, slideshowId) {
+      slideIndex = n;
+      showSlides(slideIndex, slideshowId);
+  }
+}
