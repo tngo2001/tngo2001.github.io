@@ -1,10 +1,10 @@
 {
-  "name": "three-demo",
+  "name": "thompson-ngo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
+    "dev": "coffee -c main.coffee && vite",
+    "build": "coffee -c main.coffee && vite build",
+    "serve": "coffee -c main.coffee && vite preview",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
