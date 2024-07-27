@@ -1,4 +1,4 @@
-import './style.scss'
+import './style.sass'
 import * as THREE from 'three'
 
 # Setup
