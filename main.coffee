@@ -1,3 +1,6 @@
+import './style.scss'
+import * as THREE from 'three'
+
 # Setup
 
 scene = new THREE.Scene()
@@ -34,13 +37,7 @@ pointLight.position.set 5, 5, 5
 ambientLight = new THREE.AmbientLight 0xffffff
 scene.add pointLight, ambientLight
 
-# Helpers
-
-# lightHelper = new THREE.PointLightHelper(pointLight)
-# gridHelper = new THREE.GridHelper(200, 50)
-# scene.add lightHelper, gridHelper
-
-# controls = new OrbitControls(camera, renderer.domElement)
+# Stars
 
 addStar = ->
   geometry = new THREE.SphereGeometry 0.25, 24, 24
@@ -109,6 +106,8 @@ animate = ->
   renderer.render scene, camera
 
 animate()
+
+# Slideshows
 
 initSlideshow = (slideshowId) ->
   slideIndex = 1
