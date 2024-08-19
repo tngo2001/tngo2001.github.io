@@ -135,7 +135,8 @@ html(lang='en')
           .fade
             h3
               a(href='https://github.com/tngo2001/cvd-training', target='_blank') AliveCor Training
-            h4 Skills: Java, XML
+            button.skill-button Java
+            button.skill-button XML
             p
               | An ECG training application designed specifically for Indian Volunteer healthcare workers (ASHAs).
               | The application has training lessons on the basics of reading ECGs tailored specifically for ASHAs, and includes practice questions and progress updates.
@@ -145,7 +146,8 @@ html(lang='en')
           .fade
             h3
               a(href='https://github.com/UWRealityLab/xrcapstone22wi-team7', target='_blank') Extreme Red Light Green Light
-            h4 Skills: Unity, C#
+            button.skill-button C#
+            button.skill-button Unity
             p
               | A more complex version of the game &quot;Red Light Green Light,&quot; a game where players race to a finish line while trying to avoid moving when the &quot;red light&quot; is called, only being able to move while the &quot;green light&quot; is called.
               | In addition to these features, this application consists of obstacles that require users to climb, row, and jump in order to advance.
@@ -154,7 +156,10 @@ html(lang='en')
           .fade
             h3
               a(href='https://github.com/lets-schedule', target='_blank') Let&apos;s Schedule
-            h4 Skills: React Native, TypeScript, Rails, Ruby
+            button.skill-button Ruby
+            button.skill-button Rails
+            button.skill-button TypeScript
+            button.skill-button React Native
             p
               | A smart scheduling mobile application that helps people effectively manage their schedules.
               | It features automated task scheduling, which can generate a schedule for people based on the priorities of the given tasks and the expected time each task takes up given the user&apos;s existing schedule.
@@ -170,15 +175,14 @@ html(lang='en')
         h2
           i.fas.fa-tools
           |  Skills
-        ul
-          li HTML
-          li CSS
-          li JavaScript
-          li React.js
-          li Node.js
-          li Express.js
-          li MongoDB
-          li Git 
+        .skills-buttons
+          button.skill-button CoffeeScript
+          button.skill-button EmailJS
+          button.skill-button Google Analytics
+          button.skill-button HTML/CSS/JavaScript
+          button.skill-button Pug
+          button.skill-button Sass
+          button.skill-button Three.js
       section#contact.slideshow-container
         h2
           i.fas.fa-paper-plane
