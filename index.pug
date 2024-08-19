@@ -37,10 +37,10 @@ html(lang='en')
           a.resume-link(href='https://drive.google.com/uc?export=download&id=1Ty6IZERcp-YxlJ35c2keBTRleGZcmLwq', download='', aria-label='Resume')
             i.fas.fa-download
             |  Download My Resume
-      section.left
+      section
         h2
           i.fas.fa-user
-          |  About Me
+          |  About
         p
           | Hello! My name is Thompson Ngo and I am a graduate from the University of Washington, where I earned a Bachelor of Science in Computer Science in Spring 2023.
           | With a strong foundation in software development and a passion for innovative technology, I am excited to apply my skills and knowledge to new challenges.
@@ -127,7 +127,7 @@ html(lang='en')
           span.dot(onclick="currentSlide(4, 'experience')")
           span.dot(onclick="currentSlide(5, 'experience')")
           span.dot(onclick="currentSlide(6, 'experience')")
-      section#projects.slideshow-container.left
+      section#projects.slideshow-container
         h2
           i.fas.fa-laptop
           |  Projects
@@ -166,4 +166,26 @@ html(lang='en')
           span.dot(onclick="currentSlide(1, 'projects')")
           span.dot(onclick="currentSlide(2, 'projects')")
           span.dot(onclick="currentSlide(3, 'projects')")
+      section#skills.slideshow-container
+        h2
+          i.fas.fa-tools
+          |  Skills
+        ul
+          li HTML
+          li CSS
+          li JavaScript
+          li React.js
+          li Node.js
+          li Express.js
+          li MongoDB
+          li Git 
+      section#contact.slideshow-container
+        h2
+          i.fas.fa-paper-plane
+          |  Contact
+        form#contact-form
+          input(type="text" id="name" name="from_name" placeholder="Your Name" required)
+          input(type="email" id="email" name="from_email" placeholder="Your Email" required)
+          textarea(id="message" name="message" rows="4" placeholder="Your Message" required)
+          button(type="submit") Send Message
     script(type='module', src='/main.js')

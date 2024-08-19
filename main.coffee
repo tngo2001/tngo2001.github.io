@@ -1,5 +1,6 @@
 import './style.sass'
 import * as THREE from 'three'
+import emailjs from 'emailjs-com';
 
 # Setup
 
@@ -160,3 +161,20 @@ document.addEventListener 'DOMContentLoaded', ->
   initSlideshow 'experience'
   initSlideshow 'projects'
   return
+
+# Email
+
+(() ->
+  emailjs.init 'LgXq1tEp-p_EWv38m'
+)()
+
+document.getElementById('contact-form').addEventListener 'submit', (event) ->
+  event.preventDefault()
+
+  emailjs.sendForm('service_3tl1z89', 'template_0x45zeh', this)
+    .then (response) ->
+      alert 'Message sent successfully!'
+      document.getElementById('contact-form').reset()
+    .catch (error) ->
+      alert 'Failed to send message. Please try again.'
+      console.error error
