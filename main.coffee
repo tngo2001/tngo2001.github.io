@@ -158,6 +158,20 @@ initSlideshow = (slideshowId) ->
   return
 
 document.addEventListener 'DOMContentLoaded', ->
+  # Google Analytics
+  script = document.createElement 'script'
+  script.async = true
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PWDRYSVFL'
+  document.head.appendChild script
+
+  window.dataLayer = window.dataLayer or []
+  gtag = (...args) ->
+    dataLayer.push args
+
+  gtag 'js', new Date()
+  gtag 'config', 'G-1PWDRYSVFL'
+
+  # Slideshows
   initSlideshow 'experience'
   initSlideshow 'projects'
   return
