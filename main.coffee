@@ -161,7 +161,7 @@ document.addEventListener 'DOMContentLoaded', ->
   # Google Analytics
   script = document.createElement 'script'
   script.async = true
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PWDRYSVFL'
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-N49VJMRW85'
   document.head.appendChild script
 
   window.dataLayer = window.dataLayer or []
@@ -169,12 +169,38 @@ document.addEventListener 'DOMContentLoaded', ->
     dataLayer.push args
 
   gtag 'js', new Date()
-  gtag 'config', 'G-1PWDRYSVFL'
+  gtag 'config', 'G-N49VJMRW85'
 
   # Slideshows
   initSlideshow 'experience'
   initSlideshow 'projects'
-  return
+
+  # Skills
+  skills = [
+    "A-Frame", "AWS", "Bash", "Bootstrap", "C", "C#", "C++", "Clerk", 
+    "CoffeeScript", "CSS", "D3.js", "Dart", "Django", "Docker", "EmailJS", 
+    "Express.js", "Figma", "Firebase", "Flixel", "Flutter", "GDScript", 
+    "Gemini API", "Gin", "Git", "Go", "Godot", "Google Analytics", 
+    "Google Apps Script", "Haxe", "HTML", "Java", "JavaScript", "Jira", 
+    "jQuery", "Jupyter", "Kotlin", "LangChain", "LaTeX", "LiDAR", "Lua", 
+    "Material UI", "MATLAB", "Matplotlib", "MongoDB", "MySQL", "Next.js", 
+    "Node.js", "NumPy", "Objective-C", "OCaml", "OpenAI API", "Pandas", 
+    "Perl", "Phaser", "PHP", "Pinecone", "PostgreSQL", "Postman", 
+    "PowerShell", "Pug", "Pygame", "PyTorch", "Python", "Qiskit", "R", 
+    "Racket", "Rails", "React.js", "React Native", "ROS", "Ruby", 
+    "Sass", "SciPy", "Scratch", "SCSS", "Spark", "SQL", "SQLite", 
+    "Stripe API", "Swift", "Tableau", "Tailwind CSS", "Three.js", 
+    "Tidyverse", "Tkinter", "TypeScript", "Unity", "Vega-Lite", 
+    "Vercel", "x86 Assembly", "XML"
+  ]
+
+  container = document.querySelector(".skills-buttons")
+
+  skills.forEach (skill) ->
+    button = document.createElement("button")
+    button.className = "skill-button"
+    button.innerText = skill
+    container.appendChild(button)
 
 # Email
 
