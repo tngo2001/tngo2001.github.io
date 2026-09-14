@@ -11,7 +11,8 @@ camera = new THREE.PerspectiveCamera 75, window.innerWidth / window.innerHeight,
 renderer = new THREE.WebGLRenderer
   canvas: document.querySelector('#bg')
 
-renderer.setPixelRatio window.devicePixelRatio
+renderer.setPixelRatio Math.min(window.devicePixelRatio, 2)
+renderer.autoClear = false
 renderer.setSize window.innerWidth, window.innerHeight
 window.addEventListener 'resize', ->
   renderer.setSize window.innerWidth, window.innerHeight
@@ -57,7 +58,7 @@ Array(2000).fill().forEach addStar
 
 # Avatar
 
-pictureTexture = new THREE.TextureLoader().load 'https://i.imgur.com/vXaFLyI.jpg'
+pictureTexture = new THREE.TextureLoader().load 'https://i.imgur.com/r5ucVUI.png'
 
 picture = new THREE.Mesh new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial map: pictureTexture
 
@@ -73,8 +74,29 @@ scene.add moon
 moon.position.z = 30
 moon.position.setX -10
 
-picture.position.z = -5
-picture.position.x = 2
+pictureScene = new THREE.Scene()
+pictureCamera = new THREE.PerspectiveCamera 75, window.innerWidth / window.innerHeight, 0.1, 1000
+
+narrowScreen = window.matchMedia '(max-width: 1024px)'
+header = document.querySelector 'header'
+firstSection = document.querySelector 'main section'
+
+positionPicture = ->
+  unless narrowScreen.matches
+    scene.add picture unless picture.parent is scene
+    picture.position.set 2, 0, -5
+    return
+
+  pictureScene.add picture unless picture.parent is pictureScene
+
+  headerBottom = header.getBoundingClientRect().bottom
+  gap = firstSection.getBoundingClientRect().top - headerBottom
+  size = Math.min gap * 0.6, window.innerWidth * 0.5
+  distance = 3 * window.innerHeight / (2 * size * Math.tan(THREE.MathUtils.degToRad(pictureCamera.fov / 2)))
+
+  picture.position.set 0, 0, -distance
+  pictureCamera.setViewOffset window.innerWidth, window.innerHeight, 0, window.innerHeight / 2 - (headerBottom + gap / 2), window.innerWidth, window.innerHeight
+  pictureCamera.updateProjectionMatrix()
 
 # Scroll Animation
 
@@ -90,8 +112,8 @@ moveCamera = ->
   camera.position.x = t * -0.0002
   camera.rotation.y = t * -0.0002
 
-document.body.onscroll = moveCamera
 moveCamera()
+lastScrollTop = document.body.getBoundingClientRect().top
 
 # Animation Loop
 
@@ -104,7 +126,16 @@ animate = ->
 
   moon.rotation.x += 0.005
 
+  scrollTop = document.body.getBoundingClientRect().top
+  moveCamera() unless scrollTop is lastScrollTop
+  lastScrollTop = scrollTop
+
+  positionPicture()
+
+  renderer.clear()
   renderer.render scene, camera
+  renderer.clearDepth()
+  renderer.render pictureScene, pictureCamera
 
 animate()
 
@@ -155,6 +186,18 @@ initSlideshow = (slideshowId) ->
   dots.forEach (dot, index) ->
     dot.addEventListener "click", ->
       currentSlide(index + 1, slideshowId)
+
+  slidesEl = document.querySelector('#' + slideshowId + ' .slides')
+  touchStartX = null
+  slidesEl.addEventListener 'touchstart', (event) ->
+    touchStartX = event.changedTouches[0].clientX
+  , passive: true
+  slidesEl.addEventListener 'touchend', (event) ->
+    return unless touchStartX?
+    dx = event.changedTouches[0].clientX - touchStartX
+    touchStartX = null
+    moveSlide (if dx < 0 then 1 else -1), slideshowId if Math.abs(dx) > 50
+  , passive: true
   return
 
 document.addEventListener 'DOMContentLoaded', ->
@@ -182,7 +225,7 @@ document.addEventListener 'DOMContentLoaded', ->
     "Express.js", "Figma", "Firebase", "Flixel", "Flutter", "GDScript", 
     "Gemini API", "Gin", "Git", "Go", "Godot", "Google Analytics", 
     "Google Apps Script", "Haxe", "HTML", "Java", "JavaScript", "Jira", 
-    "jQuery", "Jupyter", "Kotlin", "LangChain", "LaTeX", "LiDAR", "Lua", 
+    "jQuery", "Jupyter", "Knex.js", "Kotlin", "LangChain", "LaTeX", "LiDAR", "Lua", 
     "Material UI", "MATLAB", "Matplotlib", "MongoDB", "MySQL", "Next.js", 
     "Node.js", "NumPy", "Objective-C", "OCaml", "OpenAI API", "Pandas", 
     "Perl", "Phaser", "PHP", "Pinecone", "PostgreSQL", "Postman", 
@@ -191,7 +234,7 @@ document.addEventListener 'DOMContentLoaded', ->
     "Sass", "SciPy", "Scratch", "SCSS", "Spark", "SQL", "SQLite", 
     "Stripe API", "Swift", "Tableau", "Tailwind CSS", "Three.js", 
     "Tidyverse", "Tkinter", "TypeScript", "Unity", "Vega-Lite", 
-    "Vercel", "x86 Assembly", "XML"
+    "Vercel", "Vitest", "x86 Assembly", "XML"
   ]
 
   container = document.querySelector(".skills-buttons")
